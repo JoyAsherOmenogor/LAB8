@@ -35,3 +35,25 @@ def get_married_couples():
         WHERE type = 'spouse';
     """
     cur.execute(all_relationships_query)
+
+    married_couples = cur.fetchall()
+    con.close()
+    # Hint: See example code in lab instructions entitled "Get a List of Relationships"
+    return married_couples
+
+def save_married_couples_csv(married_couples, csv_path):
+    """Saves list of married couples to a CSV file, including both people's 
+    names and their wedding anniversary date  
+
+    Args:
+        married_couples (list): (name1, name2, start_date) of married couples
+        csv_path (str): Path of CSV file
+    """
+    # TODO: Function body
+    married_couples_df = pd.DataFrame(married_couples, columns=['Person 1' , 'Person 2', 'Anniversary'])
+    married_couples_df.to_csv(csv_path, index=False)
+    # Hint: We did this in Lab 7.
+    return
+
+if __name__ == '__main__':
+   main()
